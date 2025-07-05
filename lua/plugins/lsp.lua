@@ -88,7 +88,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "intelephense",
-                "tsserver",
+                "ts_ls",
                 "eslint",
             },
             handlers = {
