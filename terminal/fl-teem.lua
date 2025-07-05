@@ -1,3 +1,4 @@
+-- TODO: this is a todo comments
 -- Remap leaving 'terminal mode' to double tap esc
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
