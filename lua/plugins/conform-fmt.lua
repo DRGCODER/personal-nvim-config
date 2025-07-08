@@ -15,7 +15,9 @@ return {
                     lsp_fallback = true,
                 },
                 formatters = {
-                    javascript = { stop_after_first = true },
+                    javascript = {
+                        stop_after_first = true, 
+                    },
                 },
             })
         end,
