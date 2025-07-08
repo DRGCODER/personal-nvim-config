@@ -5,7 +5,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         local todo_comments = require("todo-comments")
-
         todo_comments.setup({
             keywords = {
                 FIX = {
@@ -31,5 +30,8 @@ return {
         vim.keymap.set("n", "[t", function()
             todo_comments.jump_prev()
         end, { desc = "Previous todo comment" })
+        vim.keymap.set("n", "<leader>ca", function()
+            require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME", "INFO" } })
+        end, { desc = "TODO/FIX/FIXME/INFO" })
     end,
 }
