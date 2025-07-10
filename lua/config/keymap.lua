@@ -1,5 +1,2 @@
-vim.keymap.set("n", "<leader>e", ":Oil --float<CR>", { desc = "Oil file explorer" })
-
--- Fzf keymaps
-
-vim.keymap.set("n", "<leader>ff", ":FzfLua files<CR>", { desc = "Fzf find files" })
+vim.keymap.set("n", "<leader>t", vim.cmd.term, { desc = "terminal" })
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")

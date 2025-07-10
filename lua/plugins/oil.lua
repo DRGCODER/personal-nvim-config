@@ -4,6 +4,9 @@ return {
         ---@module 'oil'
         ---@type oil.SetupOpts
         opts = {},
+        keys = {
+            { "<leader>e", ":Oil --float<CR>",  desc = "Oil file explorer" },
+        },
         -- Optional dependencies
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
         -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
