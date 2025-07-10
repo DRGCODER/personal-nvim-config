@@ -174,6 +174,15 @@ return {
 				end,
 				desc = "Fzf builtins",
 			},
+			-- TODO: add all lsp kepmaps and remove them from the lsp file
+			{
+				"<leader>ca",
+				function()
+					require("fzf-lua").register_ui_select()
+					require("fzf-lua").lsp_code_actions()
+				end,
+				desc = "Fzf LSP [C]ode [A]ction",
+			},
 		},
 	},
 }
