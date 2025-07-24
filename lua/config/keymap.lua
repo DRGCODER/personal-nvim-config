@@ -1,19 +1,11 @@
-vim.keymap.set("n", "<leader>t", vim.cmd.term, { desc = "terminal" })
+require("config.tabs")
+vim.keymap.set("n", "<leader>tt", vim.cmd.term, { desc = "terminal" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
 -- navigate between buffers
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bx", ":bd<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bc", function()
-	local buffers_in_tab = #vim.fn.tabpagebuflist()
-	if buffers_in_tab > 1 then
-		vim.cmd("bdelete")
-	else
-		-- If it's the only buffer in tab, close the tab
-		vim.cmd("tabclose")
-	end
-end, { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>bx", ":bd<CR>", { desc = "Close buffer" })
 
 -- indent code while it is still selected
 vim.keymap.set("v", "<", "<gv")
