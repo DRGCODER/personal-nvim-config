@@ -1,9 +1,13 @@
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+
 -- Basic settings
 vim.opt.number = true         -- Line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.cursorline = true     -- Highlight current line
 vim.opt.wrap = false          -- Don't wrap lines
-vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
+vim.opt.scrolloff = 5         -- Keep 10 lines above/below cursor
 vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 
 -- Indentation
@@ -20,13 +24,17 @@ vim.opt.smartcase = true  -- Case sensitive if uppercase in search
 vim.opt.hlsearch = true   -- Don't highlight search results
 vim.opt.incsearch = true  -- Show matches as you type
 
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
 -- Visual settings
 vim.opt.termguicolors = true                      -- Enable 24-bit colors
 vim.opt.signcolumn = "yes"                        -- Always show sign column
-vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
-vim.opt.showmatch = true                          -- Highlight matching brackets
+vim.opt.colorcolumn = ""                          -- Show column at 100 characters
 vim.opt.matchtime = 2                             -- How long to show matching bracket
-vim.opt.cmdheight = 1                             -- Command line height
 vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
 vim.opt.showmode = false                          -- Don't show mode in command line
 vim.opt.pumheight = 10                            -- Popup menu height
@@ -74,15 +82,8 @@ vim.opt.diffopt:append("linematch:60")
 vim.opt.redrawtime = 10000
 vim.opt.maxmempattern = 20000
 
-
 -- Cursor settings
-vim.opt.guicursor =
-"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
-
--- Folding settings
-vim.opt.foldmethod = "expr" -- Use expression for folding
--- vim.wo.vim.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
-vim.opt.foldlevel = 99      -- Start with all folds open
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Split behavior
 vim.opt.splitbelow = true -- Horizontal splits go below
@@ -113,6 +114,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup,
+    pattern = "*",
+    callback = function()
+        vim.hl.on_yank()
+    end,
+    desc = "Highlight yank"
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     group = augroup,
     pattern = { "javascript", "typescript", "json", "html", "css", "xml" },
@@ -122,8 +133,11 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+
+
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand("~/.vim/undodir")
 if vim.fn.isdirectory(undodir) == 0 then
     vim.fn.mkdir(undodir, "p")
 end
+
